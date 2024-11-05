@@ -1,0 +1,56 @@
+Here's the code with added comments for better clarity:
+
+public void deleteById(int id) {
+    Node temp1 = head;
+
+    // First, remove all nodes with the given ID at the start of the list
+    while (head != null && head.data.getEmpid() == id) {
+        Node temp = head;   // Temporary reference to the current head node
+        head = head.next;    // Move head to the next node
+        temp.next = null;    // Disconnect the node from the list
+        temp = null;         // Allow garbage collection to clear the node
+    }
+
+    // Initialize previous node reference as null
+    Node prev = null;
+
+    // Traverse the rest of the list starting from temp1
+    while (temp1 != null) {
+        // Check if the current node's empId matches the given id
+        if (temp1.data.getEmpid() == id) {
+            if (prev != null) {
+                // If there's a previous node, link it to the next node of temp1
+                prev.next = temp1.next;
+            }
+            // Remove the current node by disconnecting it
+            Node temp = temp1;
+            temp1 = temp1.next;   // Move to the next node in the list
+            temp.next = null;     // Disconnect temp from the list
+            temp = null;          // Allow garbage collection to clear the node
+        } else {
+            // If current node's empId doesn't match, just move forward
+            prev = temp1;         // Set prev to the current node
+            temp1 = temp1.next;   // Move to the next node in the list
+        }
+    }
+}
+
+Explanation of Comments
+
+1. First loop: Deletes all nodes with the given id that are at the start of the list.
+
+
+2. Second loop: Traverses the remaining nodes and deletes any nodes that have a matching id.
+
+
+3. Conditions and updates:
+
+Inside the loop, if a node matches the id, it’s removed by updating the prev.next pointer to skip over it.
+
+If it doesn’t match, the loop simply moves forward.
+
+
+
+
+This approach ensures that all nodes with the specified id are deleted from the list.
+
