@@ -1,0 +1,27 @@
+ public void deleteById(int id) {
+    	Node temp1=head;
+    	while(temp1.next!=null) {
+    	Node temp=head;
+    	if(head.data.getEmpid()==id) {
+    		head=temp.next;
+    		temp.next=null;
+    		temp=null;
+    	}
+    	else {
+    		Node prev=null;
+    		while(temp!=null && temp.data.getEmpid()!=id) {
+    			prev=temp;
+    			temp=temp.next;
+    			}
+    		if(temp!=null && temp.data.getEmpid()==id) {
+    			prev.next=temp.next;
+    			temp.next=null;
+    			temp=null;
+    		}
+    		else {
+    			System.out.println("Id Not found");
+    		}
+    	}
+    	temp1=temp1.next;
+    	
+    }
